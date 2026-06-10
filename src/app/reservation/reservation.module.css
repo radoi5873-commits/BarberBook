@@ -1,0 +1,789 @@
+/* ============================================
+   Reservation Wizard — Premium Booking Flow
+   ============================================ */
+
+.page {
+  min-height: 100vh;
+  background: var(--n-25);
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--n-100);
+  padding: 14px 0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.navInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logoMark {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--r-md);
+  background: var(--brand-500);
+  color: var(--n-0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-brand);
+}
+
+.logoLabel {
+  font-size: 1.1rem;
+  font-weight: 750;
+  color: var(--n-950);
+  letter-spacing: -0.03em;
+}
+
+.logoAccent {
+  color: var(--brand-500);
+}
+
+/* ===== MAIN ===== */
+.main {
+  padding: 40px 0 80px;
+}
+
+/* ===== WIZARD WRAPPER ===== */
+.wizardWrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ===== STEP PROGRESS BAR ===== */
+.stepProgress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 0 20px;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.stepCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--n-200);
+  background: var(--n-0);
+  color: var(--n-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease-out);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.stepLabel {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--n-400);
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.stepConnector {
+  width: 48px;
+  height: 2px;
+  background: var(--n-200);
+  margin: 0 12px;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+.stepActive .stepCircle {
+  border-color: var(--brand-500);
+  background: var(--brand-500);
+  color: var(--n-0);
+  box-shadow: var(--shadow-brand);
+}
+
+.stepActive .stepLabel {
+  color: var(--brand-600);
+}
+
+.stepDone .stepCircle {
+  border-color: var(--success-500);
+  background: var(--success-500);
+  color: var(--n-0);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+}
+
+.stepDone .stepLabel {
+  color: var(--success-600);
+}
+
+.stepDone .stepConnector,
+.stepActive .stepConnector {
+  background: var(--brand-400);
+}
+
+/* ===== STEP CONTENT ===== */
+.stepContent {
+  background: var(--n-0);
+  border: 1px solid var(--n-150);
+  border-radius: var(--r-2xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.stepPanel {
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.stepHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stepTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  background: var(--brand-50);
+  color: var(--brand-600);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: var(--r-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  width: fit-content;
+}
+
+.stepTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--n-950);
+  letter-spacing: -0.03em;
+}
+
+.accent {
+  color: var(--brand-500);
+}
+
+.stepDesc {
+  font-size: 0.875rem;
+  color: var(--n-500);
+  line-height: 1.6;
+}
+
+/* ===== SERVICE GRID ===== */
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.serviceCard {
+  background: var(--n-0);
+  border: 2px solid var(--n-150);
+  border-radius: var(--r-xl);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-smooth);
+  text-align: left;
+  position: relative;
+}
+
+.serviceCard:hover {
+  border-color: var(--n-300);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.serviceSelected {
+  border-color: var(--brand-500);
+  background: var(--brand-50);
+  box-shadow: 0 0 0 3px rgba(243, 115, 24, 0.12), var(--shadow-md);
+}
+
+.serviceEmoji {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.serviceName {
+  font-size: 0.9rem;
+  font-weight: 650;
+  color: var(--n-900);
+}
+
+.serviceMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.servicePrice {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--brand-600);
+  font-variant-numeric: tabular-nums;
+}
+
+.serviceDuration {
+  font-size: 0.75rem;
+  color: var(--n-400);
+  font-weight: 550;
+}
+
+.serviceCheck {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: var(--brand-500);
+  animation: scaleInBounce 0.3s var(--ease-spring) both;
+}
+
+/* ===== DATE SECTION ===== */
+.dateSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subSectionTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--n-700);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dateScroller {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dateScroller::-webkit-scrollbar {
+  height: 4px;
+}
+
+.dateScroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dateScroller::-webkit-scrollbar-thumb {
+  background: var(--n-200);
+  border-radius: 99px;
+}
+
+.dateChip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 12px 14px;
+  border: 2px solid var(--n-150);
+  border-radius: var(--r-xl);
+  background: var(--n-0);
+  cursor: pointer;
+  transition: all 0.2s var(--ease-smooth);
+  min-width: 70px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.dateChip:hover {
+  border-color: var(--n-300);
+  background: var(--n-25);
+}
+
+.dateChipSelected {
+  border-color: var(--brand-500);
+  background: var(--brand-500);
+  color: var(--n-0);
+  box-shadow: var(--shadow-brand);
+}
+
+.dateChipSelected .dateChipDay,
+.dateChipSelected .dateChipMonth {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.dateChipSelected .dateChipNum {
+  color: var(--n-0);
+}
+
+.dateChipDay {
+  font-size: 0.68rem;
+  font-weight: 650;
+  color: var(--n-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dateChipNum {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--n-900);
+  line-height: 1;
+}
+
+.dateChipMonth {
+  font-size: 0.68rem;
+  color: var(--n-500);
+  font-weight: 550;
+}
+
+.todayBadge {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  background: var(--success-500);
+  color: var(--n-0);
+  font-size: 0.55rem;
+  font-weight: 800;
+  padding: 1px 5px;
+  border-radius: var(--r-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+/* ===== TIME SECTION ===== */
+.timeSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeInUp 0.3s var(--ease-out) both;
+}
+
+.slotSpinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--n-200);
+  border-top-color: var(--brand-500);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.timeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.timeChip {
+  padding: 10px;
+  border: 2px solid var(--n-150);
+  border-radius: var(--r-lg);
+  background: var(--n-0);
+  font-size: 0.9rem;
+  font-weight: 650;
+  color: var(--n-800);
+  cursor: pointer;
+  transition: all 0.2s var(--ease-smooth);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.timeChip:hover:not(:disabled) {
+  border-color: var(--n-300);
+  background: var(--n-25);
+}
+
+.timeChipSelected {
+  border-color: var(--brand-500);
+  background: var(--brand-500);
+  color: var(--n-0);
+  box-shadow: var(--shadow-brand);
+}
+
+.timeChipBooked {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: var(--n-50);
+  text-decoration: line-through;
+}
+
+.bookedLabel {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--danger-500);
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.timeChipSelected .bookedLabel {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== INFO FORM ===== */
+.infoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  color: var(--n-400);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.formInputWithIcon {
+  padding-left: 40px !important;
+}
+
+/* ===== RECAP CARD ===== */
+.recapCard {
+  background: var(--n-25);
+  border: 1px solid var(--n-150);
+  border-radius: var(--r-xl);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.recapRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 0;
+}
+
+.recapRow:first-child {
+  padding-top: 0;
+}
+
+.recapIcon {
+  color: var(--brand-500);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.recapInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.recapLabel {
+  font-size: 0.72rem;
+  font-weight: 650;
+  color: var(--n-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.recapValue {
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--n-900);
+}
+
+.recapSub {
+  font-size: 0.78rem;
+  color: var(--n-500);
+  margin-top: 2px;
+}
+
+.recapPrice {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--brand-600);
+  font-variant-numeric: tabular-nums;
+}
+
+.recapDuration {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--n-400);
+  background: var(--n-100);
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+}
+
+.recapDivider {
+  height: 1px;
+  background: var(--n-150);
+}
+
+.recapTotal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 0 0;
+  margin-top: 16px;
+  border-top: 2px dashed var(--n-200);
+  color: var(--n-600);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.recapTotal strong {
+  margin-left: auto;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--brand-600);
+}
+
+/* ===== WIZARD FOOTER ===== */
+.wizardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.wizardFooterRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.pricePreview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.pricePreview span {
+  font-size: 0.72rem;
+  color: var(--n-400);
+  font-weight: 550;
+}
+
+.pricePreview strong {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--brand-600);
+  letter-spacing: -0.02em;
+}
+
+/* ===== ERROR BANNER ===== */
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--danger-50);
+  border: 1px solid var(--danger-100);
+  color: var(--danger-600);
+  border-radius: var(--r-lg);
+  font-size: 0.85rem;
+  font-weight: 550;
+}
+
+/* ===== SPINNER ===== */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--n-0);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
+
+/* ===== SUCCESS STATE ===== */
+.successWrapper {
+  max-width: 520px;
+  margin: 60px auto 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  background: var(--n-0);
+  border: 1px solid var(--n-150);
+  border-radius: var(--r-2xl);
+  padding: 48px 36px;
+  box-shadow: var(--shadow-lg);
+}
+
+.successIconWrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--success-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  animation: scaleInBounce 0.5s var(--ease-spring) both;
+}
+
+.successIcon {
+  color: var(--success-500);
+}
+
+.successTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--n-950);
+  letter-spacing: -0.03em;
+}
+
+.successText {
+  font-size: 0.875rem;
+  color: var(--n-500);
+  line-height: 1.6;
+  max-width: 380px;
+}
+
+.successRecap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.successRecapItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--n-50);
+  border: 1px solid var(--n-150);
+  border-radius: var(--r-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--n-700);
+}
+
+.successRecapItem svg {
+  color: var(--brand-500);
+}
+
+.successActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .stepProgress {
+    padding: 0;
+    gap: 0;
+  }
+
+  .stepLabel {
+    display: none;
+  }
+
+  .stepConnector {
+    width: 32px;
+    margin: 0 6px;
+  }
+
+  .stepPanel {
+    padding: 24px 20px;
+  }
+
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .wizardFooter {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .wizardFooterRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .wizardFooterRight .btn {
+    flex: 1;
+  }
+
+  .successWrapper {
+    margin-top: 24px;
+    padding: 32px 20px;
+  }
+
+  .successActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .successRecap {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .successRecapItem {
+    justify-content: center;
+  }
+
+  .recapTotal strong {
+    font-size: 1.25rem;
+  }
+}
