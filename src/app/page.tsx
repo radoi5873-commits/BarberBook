@@ -250,17 +250,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ========== LOGOS / TRUST ========== */}
-      <section className={styles.trust}>
-        <div className="container">
-          <p className={styles.trustLabel}>Propulsé par des technologies de confiance</p>
-          <div className={styles.trustLogos}>
-            {['Next.js', 'React', 'Supabase', 'Vercel', 'TypeScript'].map((t) => (
-              <span key={t} className={styles.trustLogo}>{t}</span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ========== FEATURES ========== */}
       <section id="features" className={styles.features}>
